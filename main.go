@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	initializers.InitializeServer("3000", func(port string) {
+	initializers.InitServer("3000", func(port string) {
 		fmt.Println("Server Running at port " + port)
 	})
 }
