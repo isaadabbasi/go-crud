@@ -44,22 +44,6 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// CreateUser - Create user
-func CreateUser(w http.ResponseWriter, r *http.Request) {
-	var user entities.User
-	json.NewDecoder(r.Body).Decode(&user)
-
-	created := repositories.CreateUser(&user)
-
-	if created == true {
-		w.WriteHeader(201)
-		w.Write([]byte("Created"))
-	} else {
-		w.WriteHeader(404)
-		w.Write([]byte("Not Found"))
-	}
-}
-
 // UpdateUser - Update user
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	var user entities.User
