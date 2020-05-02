@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/isaadabbasi/go_crud/entities"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -29,10 +30,15 @@ func GetSecretKeyJWT() string {
 
 // GenerateToken - Generates HS-256 JWT Token. (KIS)
 func GenerateToken() (string, error) {
-	claims := jwt.StandardClaims{
-		ExpiresAt: time.Now().Add(time.Hour * 6).Unix(),
-		IssuedAt:  time.Now().Unix(),
-		Subject:   "verficiation",
+	claims := entities.CustomClaimsJWT{
+		Username: "abcd",
+		Email:    "adsasd",
+		StandardClaims: jwt.StandardClaims{
+			Audience:  "",
+			Issuer:    "github.com/isaadabbasi",
+			ExpiresAt: time.Now().Add(time.Hour * 1).Unix(),
+			IssuedAt:  time.Now().Unix(),
+		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	t, err := token.SignedString([]byte(GetSecretKeyJWT()))
